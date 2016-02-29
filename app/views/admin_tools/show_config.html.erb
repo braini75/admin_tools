@@ -1,0 +1,10 @@
+<h2><%=l(:at_title)%>: <%=l(:at_settings_show)%></h2>
+<%@settings.each do |setting|%>
+	<%unless setting.nil?%>
+		<p>Name: <%= setting.name%> <br>Value: <%=setting['value']%></p>
+	<%end%>
+<%end%>
+<% content_for :sidebar do %>
+	<p><%= link_to l(:at_home), controller: "admin_tools", action: "index"%></p>
+	<%= render :partial => 'menu' %>
+<%end%>
