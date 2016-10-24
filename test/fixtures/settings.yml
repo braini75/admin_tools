@@ -1,0 +1,12 @@
+setting_001:
+  id: 1
+  name: Setting One
+  value: This is a String Value
+setting_002:
+  id: 2
+  name: Second setting as Integer
+  value: 123
+setting_003:
+  id: 3
+  name: Third setting as html
+  value: <h1>Header1</h2>
