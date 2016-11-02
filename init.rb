@@ -1,7 +1,7 @@
 Redmine::Plugin.register :admin_tools do
   name 'Admin Tools plugin'
   author 'Thomas Koch'
-  description 'This is a plugin for Redmine poviding some Admin Tools'
+  description 'This is a plugin for Redmine providing some Admin Tools'
   version '1.1'
   url 'https://github.com/braini75/admin_tools'
   author_url 'https://github.com/braini75'
