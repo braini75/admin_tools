@@ -1,0 +1,11 @@
+/*
+ * This file is part of Redmine Admin Tools Plugin.
+ *
+ * Redmine LDAP Sync is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ */
+
+#admin-menu a.admin-tools { background-image:url('../images/admin_tools.png'); }
