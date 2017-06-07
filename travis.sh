@@ -35,6 +35,11 @@ then
   git checkout -b $REDMINE_GIT_TAG origin/$REDMINE_GIT_TAG
 fi
 
+# Install required Plugin: redmine_workload
+cd plugins
+git clone https://github.com/braini75/redmine_workload.git
+cd ..
+
 # create a link to the backlogs plugin
 ln -sf $PATH_TO_PLUGIN plugins/$NAME_OF_PLUGIN
 
