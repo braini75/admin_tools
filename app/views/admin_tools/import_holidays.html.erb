@@ -1,0 +1,68 @@
+<div class="contextual">
+    <%= render_action_links %>
+</div>
+
+<%= form_tag({:controller => 'admin_tools', :action => 'import_holidays'},
+:id => 'import_holidays') do -%>
+<fieldset class="box tabular">
+  <p>
+    <%= label_tag(:url, "URL:") %>
+    <%= text_field_tag :url, @url, size: 50 %>    
+  </p>
+  <p>
+    <%= label_tag(:option, "Options:") %>
+    <%= text_field_tag :option, @option, size: 50 %>
+  </p>
+  <%= hidden_field_tag :year, @this_year %>
+  
+</fieldset>
+
+  <p class="buttons">
+    <%= link_to_function l(:button_show), '$("#import_holidays").submit()', :class => 'icon icon-list' %>
+    <%= link_to_function l(:button_cancel), "$('#import_holidays').attr('action','index').submit()", :class => 'icon icon-cancel' %>
+	    
+    <%= link_to_function l(:button_save), "$('#import_holidays').attr('action','save_import').submit()", :class => 'icon icon-save' if @data%>
+  </p>
+  <% if @data%>
+  	  	
+  	<table class="list">
+  		<thead><tr>
+	  			<th class="checkbox hide-when-print">
+	  				<%= toggle_checkboxes_link('.list input') %>
+			      </th>  				
+				<th>Holiday</th>
+				<th>Date</th>
+				<th>Comment</th>
+			</tr>
+		</thead>
+		<tbody>
+  			<%@data.each do |holiday|%>
+  			<tr class="<%= cycle("odd", "even") %>">
+  				<td><%= check_box_tag holiday[0] %></td>
+  				<td><%=holiday[0]%></td>
+  				<td><%=holiday[1]["datum"]%></td>
+  				<td><small><%=holiday[1]["hinweis"]%></small></td>
+  			</tr>
+  	
+  			<% end %>
+  		</tbody>
+  	</table>
+  <% end %>
+  
+  	<p>
+	    <%= label_tag(:clear_year, "Überschreibe das Jahr #{@this_year}") %>
+	    <%= check_box_tag :clear_year,1 %>  		
+  	</p>
+  	
+  	<h1><%= l(:workload_holiday_title)%></h1>
+  	<p>
+		<%= link_to "<<", :controller => 'admin_tools', :action => "import_holidays", :year => @this_year-1 %>
+		<%= @this_year %>
+		<%= link_to ">>", :controller => 'admin_tools', :action => "import_holidays", :year => @this_year+1 %>
+</p>
+	<% unless @wl_national_holiday.empty?%>
+	
+		<%= render(partial: "wl_national_holiday/show_list", locals: {wl_national_holiday: @wl_national_holiday, is_allowed: @is_allowed}) %>
+	<%end%>
+
+<% end %>

@@ -4,3 +4,5 @@ en:
   at_title: "Admin Tools"
   at_home:  "Admin-Tools Home"
   at_settings_show: "Show All Settings"
+  import_holidays: "Import Holidays"
+  import_vacations: "Import MIP-Vacations"
