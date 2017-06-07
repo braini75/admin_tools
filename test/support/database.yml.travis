@@ -1,8 +1,5 @@
 test:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  adapter: mysql2
+  encoding: utf8
   database: travis_ci_test
-  user: postgres
-
-
+  user: travis
