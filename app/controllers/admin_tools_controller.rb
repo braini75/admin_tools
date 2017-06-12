@@ -1,6 +1,6 @@
 class AdminToolsController < ApplicationController
   unloadable
-  #before_filter :require_admin
+  before_filter :select_year
   #require_sudo_mode :index
   helper :work_load
 
@@ -13,12 +13,7 @@ class AdminToolsController < ApplicationController
     @settings = Setting.all
   end
   
-  def import_holidays
-    if (params[:year])
-      @this_year=params[:year].to_i
-    else 
-      @this_year=Date.today.strftime("%Y").to_i
-    end
+  def import_holidays    
     # Load Holiday List
     filter_year_start=Date.new(@this_year,01,01)
     filter_year_end=Date.new(@this_year,12,31)
@@ -26,6 +21,7 @@ class AdminToolsController < ApplicationController
     @is_allowed = User.current.allowed_to_globally?(:edit_national_holiday)
     
     @url= (!Setting.plugin_admin_tools['holiday_import_url'].blank? ? Setting.plugin_admin_tools['holiday_import_url'] : false)
+    @proxy= (!Setting.plugin_admin_tools['proxy_url'].blank? ? Setting.plugin_admin_tools['proxy_url'] : false)
     
     @option="jahr=#{@this_year}&nur_land=TH"
     logger.info "Params: #{params.inspect}"
@@ -69,11 +65,19 @@ class AdminToolsController < ApplicationController
   
 private
   def load_json(params)
-    @url = params[:url] + "?" + params[:option]
+    url = params[:url] + "?" + params[:option]
       begin
-        @data = JSON.load(open(@url))
+        logger.info 
+        @data = JSON.load(open(url, :proxy => params[:proxy]))
       rescue Exception => e
         flash.now[:error] = e.message           
       end
   end  
+  def select_year
+    if (params[:year])
+      @this_year=params[:year].to_i
+    else 
+      @this_year=Date.today.strftime("%Y").to_i
+    end
+  end
 end

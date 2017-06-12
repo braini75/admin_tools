@@ -1,6 +1,5 @@
 language: ruby
 rvm:
-  - 2.0
   - 2.3.0
 
 services:
@@ -11,7 +10,6 @@ branches:
     - master
 
 env:
-  - REDMINE_VER=2.6-stable
   - REDMINE_VER=3.2-stable
   - REDMINE_VER=master
 

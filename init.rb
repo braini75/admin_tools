@@ -10,7 +10,8 @@ Redmine::Plugin.register :admin_tools do
 
   settings :partial => 'settings/admin_tools_settings',
            :default => {
-             'holiday_import_url'   => "https://feiertage.jarmedia.de/api/"
+             'holiday_import_url'   => "https://feiertage.jarmedia.de/api/",
+             'proxy_url'            => "http://proxy.clondiag.jena:8080"
   }
 
 end
